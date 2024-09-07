@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/styles/user-dashboard.css" />
+
+<div class="container-wrapper">
+
+	{{!-- navbar --}}
+	<header>
+		<div class="container">
+			<h1>Welcome to Your Dashboard</h1>
+			<nav>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Profile</a></li>
+					<li><a href="#">Settings</a></li>
+					<li><a href="/user/logout">Logout</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	{{!-- main content --}}
+	<main>
+		<div class="container">
+			<section class="recent-activities">
+				<h2>Recent Activities</h2>
+				<ul>
+					<li>Logged in at {{{dateFormat now "h:mm:ss a"}}}</li>
+					<li>Completed task XYZ</li>
+					<li>Received a new message</li>
+				</ul>
+			</section>
+
+			{{!-- current user info --}}
+			<section class="center-box">
+				<p>Current User</p>
+				<h1>{{user.username}}</h1>
+				<p>{{user.email}}</p>
+			</section>
+
+			<section class="notifications">
+				<h2>Notifications</h2>
+				<p>You have no new notifications.</p>
+			</section>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2024 My Website. All rights reserved.</p>
+			<ul>
+				<li><a href="#">Privacy Policy</a></li>
+				<li><a href="#">Terms of Service</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</div>
+	</footer>
+</div>
