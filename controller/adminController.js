@@ -12,16 +12,16 @@ const adminLogin = async (req, res) => {
     const {email, password} = req.body;
 
     if(email.trim().length < 1)
-      return res.render('user/auth',{status:401, message:'Please enter your email'})
+      return res.render('admin/login',{status:401, pass:password, message:'Please enter your email'})
 
     if(password.trim().length < 1)
-      return res.render('user/auth',{status:401, message:'Please enter your email'})
+      return res.render('admin/login',{status:401, mail:email, message:'Please enter the password'})
 
     const user = await adminSchema.findOne({email});
 
-    if(!user) return res.render('admin/login',{status:401, message:'User does not exists'})
+    if(!user) return res.render('admin/login',{status:401, mail:email, pass:password, message:'User does not exists'})
     
-    if(user.password !== password) return res.render('admin/login',{status:401, message:'Incorrect password'});
+    if(user.password !== password) return res.render('admin/login',{status:401, mail:email, message:'Incorrect password'});
 
     req.session.admin = true
 

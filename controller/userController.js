@@ -6,9 +6,25 @@ const registerUser = async (req, res) => {
   try {
     
     const {email, username, password, confirm} = req.body
+
     if(email.length < 1 || password.length < 1 || confirm.length < 1 || username.length < 1) 
-      return res.render('user/auth', {status:403, message: 'All fields are mandatory'})
-    if(password !== confirm) return res.render('user/auth', {status:403, message: 'Password doesn\'t match'})
+      return res.render('user/auth', {
+        status:403,
+        message: 'All fields are mandatory',
+        mail: email,
+        name: username,
+        pass: password,
+        confirm: confirm
+      })
+
+    if(password !== confirm) return res.render('user/auth', {
+      status:403,
+      message: 'Password doesn\'t match',
+      mail: email,
+      name: username,
+      pass: password,
+      confirm: confirm
+    })
 
     //checking user Existence
     const user = await userSchema.findOne({email})
@@ -45,10 +61,10 @@ const userLogin = async (req, res) => {
     const {email, password} = req.body;
     
     if(email.trim().length < 1)
-      return res.render('user/auth',{status:401, message:'Please enter your email'})
+      return res.render('user/auth',{status:401, pass:password, message:'Please enter your email'})
 
     if(password.trim().length < 1)
-      return res.render('user/auth',{status:401, message:'Please enter your email'})
+      return res.render('user/auth',{status:401, mail:email, message:'Please enter the password'})
 
     const user = await userSchema.findOne({email});
 
